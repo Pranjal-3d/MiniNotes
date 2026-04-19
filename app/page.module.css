@@ -124,7 +124,7 @@
 }
 
 [data-theme='dark'] .card:hover {
-  border-color: #4b5563;
+  border-color: #666666;
 }
 
 .cardHeader {
@@ -201,7 +201,7 @@
 .modalOverlay {
   position: fixed;
   inset: 0;
-  background: rgba(17, 24, 39, 0.4);
+  background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(4px);
   display: flex;
   align-items: center;
