@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Plus, Search, Edit2, Trash2, X, Loader2, FileText } from 'lucide-react';
+import { Plus, Search, Edit2, Trash2, X, Loader2, FileText, Sun, Moon } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import styles from './page.module.css';
 
@@ -26,6 +26,28 @@ export default function Home() {
   
   // Form state
   const [formData, setFormData] = useState({ title: '', description: '' });
+
+  // Theme state
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+  
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('app-theme');
+    if (savedTheme) {
+      setTheme(savedTheme as 'light' | 'dark');
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    } else {
+      const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      setTheme(isDark ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+    localStorage.setItem('app-theme', newTheme);
+    document.documentElement.setAttribute('data-theme', newTheme);
+  };
 
   // Fetch notes
   const fetchNotes = async () => {
@@ -137,6 +159,14 @@ export default function Home() {
         </motion.h1>
         
         <div className={styles.controls}>
+          <button 
+            className={styles.themeToggle} 
+            onClick={toggleTheme}
+            aria-label="Toggle theme"
+          >
+            {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
+          </button>
+          
           <motion.div 
             className={styles.searchContainer}
             initial={{ opacity: 0, x: 20 }}

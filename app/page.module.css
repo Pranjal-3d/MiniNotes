@@ -29,6 +29,23 @@
   align-items: center;
 }
 
+.themeToggle {
+  background: transparent;
+  border: 1px solid var(--card-border);
+  padding: 0.65rem;
+  border-radius: 8px;
+  color: var(--text-muted);
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.themeToggle:hover {
+  background: var(--input-bg);
+  color: var(--title);
+}
+
 .searchContainer {
   position: relative;
   display: flex;
@@ -56,7 +73,11 @@
 
 .searchInput:focus {
   border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+  box-shadow: 0 0 0 3px rgba(17, 24, 39, 0.15);
+}
+
+[data-theme='dark'] .searchInput:focus {
+  box-shadow: 0 0 0 3px rgba(249, 250, 251, 0.15);
 }
 
 .createBtn {
@@ -64,20 +85,18 @@
   align-items: center;
   gap: 0.5rem;
   background: var(--primary);
-  color: white;
-  border: none;
-  padding: 0.65rem 1.25rem;
+  color: var(--background);
+  border: 1px solid var(--primary);
+  padding: 0.6rem 1.25rem;
   border-radius: 8px;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 0.9rem;
   transition: all 0.2s ease;
-  box-shadow: var(--shadow-sm);
 }
 
 .createBtn:hover {
-  background: var(--primary-hover);
-  transform: translateY(-1px);
-  box-shadow: var(--shadow);
+  background: var(--background);
+  color: var(--primary);
 }
 
 .grid {
@@ -99,15 +118,13 @@
 }
 
 .card:hover {
-  border-color: #cbd5e1;
+  border-color: #d1d5db;
   box-shadow: var(--shadow);
   transform: translateY(-2px);
 }
 
-@media (prefers-color-scheme: dark) {
-  .card:hover {
-    border-color: #475569;
-  }
+[data-theme='dark'] .card:hover {
+  border-color: #4b5563;
 }
 
 .cardHeader {
@@ -184,7 +201,7 @@
 .modalOverlay {
   position: fixed;
   inset: 0;
-  background: rgba(15, 23, 42, 0.4);
+  background: rgba(17, 24, 39, 0.4);
   backdrop-filter: blur(4px);
   display: flex;
   align-items: center;
@@ -257,8 +274,13 @@
 
 .input:focus, .textarea:focus {
   border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+  box-shadow: 0 0 0 3px rgba(17, 24, 39, 0.15);
   background: var(--card-bg);
+}
+
+[data-theme='dark'] .input:focus,
+[data-theme='dark'] .textarea:focus {
+  box-shadow: 0 0 0 3px rgba(249, 250, 251, 0.15);
 }
 
 .textarea {
@@ -275,7 +297,7 @@
 }
 
 .cancelBtn {
-  padding: 0.65rem 1.25rem;
+  padding: 0.6rem 1.25rem;
   background: transparent;
   border: 1px solid var(--card-border);
   border-radius: 8px;
@@ -291,11 +313,11 @@
 }
 
 .submitBtn {
-  padding: 0.65rem 1.25rem;
+  padding: 0.6rem 1.25rem;
   background: var(--primary);
-  border: none;
+  border: 1px solid var(--primary);
   border-radius: 8px;
-  color: white;
+  color: var(--background);
   font-weight: 500;
   font-size: 0.95rem;
   transition: all 0.2s ease;
@@ -305,14 +327,13 @@
 }
 
 .submitBtn:hover:not(:disabled) {
-  background: var(--primary-hover);
-  transform: translateY(-1px);
+  background: var(--background);
+  color: var(--primary);
 }
 
 .submitBtn:disabled {
-  opacity: 0.6;
+  opacity: 0.5;
   cursor: not-allowed;
-  transform: none;
 }
 
 /* Loading State */
